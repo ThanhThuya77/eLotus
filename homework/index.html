@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Form upload file</h1>
+
+    <label id="errorMessage" style="color:red">The size of image should be less than 8MB</label>
+    <label for="img">Select image:</label>
+    <input type="file" id="img" name="data" accept="image/*">
+    <button onclick="handleSubmit()">Submit</button>
+    <script>
+        var errorMessage = document.getElementById("errorMessage");
+        errorMessage.style.display = "none";
+        function handleSubmit(file) { 
+            var fileVal=document.getElementById("img")?.files?.[0];
+            console.log('fileVal', fileVal);
+           
+            errorMessage.style.display = "none";
+            var data = new FormData()
+            data.append('data', fileVal)
+
+
+            fetch('http://localhost:3000/update', {
+                method: 'POST',
+                body: data
+            }).then(
+                response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }
+            ).then(
+                success => console.log(success) // Handle the success response object
+            ).catch(
+                error => {
+                    error.json().then((json) => {
+                        errorMessage.innerHTML = json.message;
+                        errorMessage.style.display = "block";
+                    })
+                    
+                } // Handle the error response object
+            );
+        }
+    </script>
+</body>
+</html>
