@@ -13,8 +13,9 @@ Open terminal command
 
 1. run: cd ./homework<br/>
 2. Open index.html<br/>
-3. Continue to run: cd ./backend<br/>
-4. run: npm start // to start server, app listening on port 3000<br/>
+3. run: cd ./backend<br/>
+4. run: npm install<br/>
+5. run: npm start // to start server, app listening on port 3000<br/>
 
 We have 2 apis <br/>
 /update (POST) <br/>
